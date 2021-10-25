@@ -4,7 +4,6 @@ import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import CenterMapView from "./CenterMapView";
-// import { useState, useEffect, useCallback } from "react";
 import IntStation from "../international-space-station.png";
 
 const Map = (props) => {
