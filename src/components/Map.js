@@ -3,59 +3,16 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
-import ChangeMapView from "./ChangeMapView";
-import { useState, useEffect, useCallback } from "react";
+import CenterMapView from "./CenterMapView";
+// import { useState, useEffect, useCallback } from "react";
 import IntStation from "../international-space-station.png";
 
-const Map = () => {
-  // const [location, setLocation] = useState(0);
-  const [long, setLong] = useState(0);
-  const [lat, setLat] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        "https://api.wheretheiss.at/v1/satellites/25544"
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong! Try again later.");
-      }
-      const data = await response.json();
-      const { latitude, longitude } = data;
-
-      setLat(parseFloat(latitude));
-      setLong(parseFloat(longitude));
-    } catch (error) {
-      setError(error.message);
-    }
-    setIsLoading(false);
-  }, []);
-
-  // const fetchData = useCallback(async () => {
-  //   await Axios.get("https://api.wheretheiss.at/v1/satellites/25544").then(
-  //     (response) => setLocation(response.data)
-  //   );
-
-  //   setLong(parseFloat(location.longitude));
-  //   setLat(parseFloat(location.latitude));
-  // }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const position = [lat, long];
-  console.log(position);
-
+const Map = (props) => {
   return (
     <div>
       <MapContainer
         className="map-container"
-        center={position}
+        center={props.stationPosition}
         zoom={3}
         scrollWheelZoom={true}
       >
@@ -64,7 +21,7 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker
-          position={position}
+          position={props.stationPosition}
           icon={
             new Icon({
               iconUrl: IntStation,
@@ -77,7 +34,7 @@ const Map = () => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
-        <ChangeMapView coords={position} />
+        <CenterMapView coords={props.stationPosition} />
       </MapContainer>
     </div>
   );
