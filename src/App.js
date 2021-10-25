@@ -41,7 +41,9 @@ function App() {
   // }, []);
 
   useEffect(() => {
-    fetchData();
+    setInterval(() => {
+      fetchData();
+    }, 1000);
   }, [fetchData]);
 
   const position = [lat, long];
