@@ -7,11 +7,12 @@ import CenterMapView from "./CenterMapView";
 import IntStation from "../international-space-station.png";
 
 const Map = (props) => {
+  const position = [props.stationLat, props.stationLong];
   return (
     <div>
       <MapContainer
         className="map-container"
-        center={props.stationPosition}
+        center={position}
         zoom={3}
         scrollWheelZoom={true}
       >
@@ -20,7 +21,7 @@ const Map = (props) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker
-          position={props.stationPosition}
+          position={position}
           icon={
             new Icon({
               iconUrl: IntStation,
@@ -33,7 +34,7 @@ const Map = (props) => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
-        <CenterMapView coords={props.stationPosition} />
+        <CenterMapView coords={position} />
       </MapContainer>
     </div>
   );
