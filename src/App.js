@@ -63,7 +63,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Where is the Station?</h1>
+        <h1>The ISS Tracker</h1>
       </header>
       <Map stationLat={lat} stationLong={long} />
     </div>
