@@ -31,7 +31,13 @@ const Map = (props) => {
           }
         >
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            Current speed:{" "}
+            {props.velocity.toLocaleString("en-US", {
+              maximumFractionDigits: 0,
+            })}{" "}
+            km/h
+            <br />
+            Current altitude: {props.altitude.toFixed(0)} km above the Earth
           </Popup>
         </Marker>
         <CenterMapView coords={position} />

@@ -65,7 +65,7 @@ function App() {
       <header className="App-header">
         <h1>The ISS Tracker</h1>
       </header>
-      <Map stationLat={lat} stationLong={long} />
+      <Map stationLat={lat} stationLong={long} velocity={velo} altitude={alt} />
     </div>
   );
 }
