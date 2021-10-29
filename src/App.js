@@ -9,7 +9,7 @@ function App() {
   const [long, setLong] = useState(0);
   const [lat, setLat] = useState(0);
   const [velo, setVelo] = useState(0);
-  const [vis, setVis] = useState(0);
+  const [vis, setVis] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -49,13 +49,14 @@ function App() {
   // }, []);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       fetchData();
     }, 5000);
-  }, [fetchData]);
+    return () => clearInterval(interval);
+  }, []);
 
-  console.log(lat);
-  console.log(long);
+  // console.log(lat);
+  // console.log(long);
 
   // const position = [lat, long];
   // console.log(position);
@@ -65,7 +66,15 @@ function App() {
       <header className="App-header">
         <h1>The ISS Tracker</h1>
       </header>
-      <Map stationLat={lat} stationLong={long} velocity={velo} altitude={alt} />
+      <section>
+        <Map
+          sLat={lat}
+          sLong={long}
+          sVelocity={velo}
+          sAltitude={alt}
+          sVis={vis}
+        />
+      </section>
     </div>
   );
 }

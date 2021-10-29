@@ -7,7 +7,7 @@ import CenterMapView from "./CenterMapView";
 import IntStation from "../international-space-station.png";
 
 const Map = (props) => {
-  const position = [props.stationLat, props.stationLong];
+  const position = [props.sLat, props.sLong];
   return (
     <div>
       <MapContainer
@@ -26,18 +26,18 @@ const Map = (props) => {
             new Icon({
               iconUrl: IntStation,
               iconSize: [50, 50],
-              // iconAnchor: [12, 41],
+              iconAnchor: [25, 25],
             })
           }
         >
           <Popup>
             Current speed:{" "}
-            {props.velocity.toLocaleString("en-US", {
+            {props.sVelocity.toLocaleString("en-US", {
               maximumFractionDigits: 0,
             })}{" "}
             km/h
             <br />
-            Current altitude: {props.altitude.toFixed(0)} km above the Earth
+            Current altitude: {props.sAltitude.toFixed(0)} km above the Earth
           </Popup>
         </Marker>
         <CenterMapView coords={position} />
